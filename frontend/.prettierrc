@@ -1,0 +1,12 @@
+{
+    "endOfLine": "lf",
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "printWidth": 80,
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "htmlWhitespaceSensitivity": "ignore",
+    "semi": true,
+    "tabWidth": 4,
+    "useTabs": false,
+    "vueIndentScriptAndStyle": true
+}
