@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import { reactive } from "vue";
+    import { Button } from "@/components/ui/button";
     import { Greet } from "../../wailsjs/go/main/App";
 
     const data = reactive({
@@ -17,6 +18,9 @@
 <template>
     <main>
         <h1 class="bg-blue-800 font-bold text-gray-200">Tailwind Test</h1>
+        <div>
+            <Button variant="destructive">Click me</Button>
+        </div>
         <div id="result" class="result">{{ data.resultText }}</div>
         <div id="input" class="input-box">
             <input
