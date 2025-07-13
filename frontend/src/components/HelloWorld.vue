@@ -1,7 +1,17 @@
 <script lang="ts" setup>
     import { reactive } from "vue";
+    import { Icon } from "@iconify/vue";
+    import { useColorMode } from "@vueuse/core";
     import { Button } from "@/components/ui/button";
+    import {
+        DropdownMenu,
+        DropdownMenuContent,
+        DropdownMenuItem,
+        DropdownMenuTrigger,
+    } from "@/components/ui/dropdown-menu";
     import { Greet } from "../../wailsjs/go/main/App";
+
+    const mode = useColorMode();
 
     const data = reactive({
         name: "",
@@ -20,6 +30,34 @@
         <h1 class="bg-blue-800 font-bold text-gray-200">Tailwind Test</h1>
         <div>
             <Button variant="destructive">Click me</Button>
+        </div>
+        <div>
+            <DropdownMenu>
+                <DropdownMenuTrigger as-child>
+                    <Button variant="outline">
+                        <Icon
+                            icon="radix-icons:moon"
+                            class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+                        />
+                        <Icon
+                            icon="radix-icons:sun"
+                            class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
+                        />
+                        <span class="sr-only">Toggle theme</span>
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <DropdownMenuItem @click="mode = 'light'">
+                        Light
+                    </DropdownMenuItem>
+                    <DropdownMenuItem @click="mode = 'dark'">
+                        Dark
+                    </DropdownMenuItem>
+                    <DropdownMenuItem @click="mode = 'auto'">
+                        System
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
         </div>
         <div id="result" class="result">{{ data.resultText }}</div>
         <div id="input" class="input-box">
