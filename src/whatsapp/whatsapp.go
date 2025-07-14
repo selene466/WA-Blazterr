@@ -1,4 +1,4 @@
-package main
+package whatsapp
 
 import (
 	"WA-Iris/src/dbinit"
@@ -38,7 +38,7 @@ func eventHandler(evt interface{}) {
 	}
 }
 
-func main() {
+func Start() {
 	dbLog := waLog.Stdout("Database", "DEBUG", true)
 	ctx := context.Background()
 	db, err := dbinit.FileDB()
@@ -118,4 +118,3 @@ func main() {
 
 	client.Disconnect()
 }
-

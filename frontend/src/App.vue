@@ -1,22 +1,26 @@
 <script lang="ts" setup>
-    import HelloWorld from "./components/HelloWorld.vue";
+    import { Button } from "@/components/ui/button";
+    import { StartWhatsapp, ShowWhatsapp } from "../wailsjs/go/main/App";
+
+    // var
+    let data = "test";
+
+    // function
+    function startWhatsapp() {
+        StartWhatsapp();
+    }
+
+    async function showWhatsapp() {
+        data = await ShowWhatsapp();
+    }
 </script>
 
 <template>
-    <img id="logo" alt="Wails logo" src="./assets/images/logo-universal.png" />
-    <HelloWorld />
+    <div>
+        <Button @click="startWhatsapp">Start</Button>
+        <Button @click="showWhatsapp">Show</Button>
+        <div>
+            {{ data }}
+        </div>
+    </div>
 </template>
-
-<style>
-    #logo {
-        display: block;
-        width: 50%;
-        height: 50%;
-        margin: auto;
-        padding: 10% 0 0;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-origin: content-box;
-    }
-</style>

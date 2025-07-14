@@ -2,8 +2,11 @@ package main
 
 import (
 	"WA-Iris/src/dbinit"
+	"WA-Iris/src/whatsapp"
 	"context"
 	"fmt"
+
+	waLog "go.mau.fi/whatsmeow/util/log"
 )
 
 // App struct
@@ -26,4 +29,12 @@ func (a *App) startup(ctx context.Context) {
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
+}
+
+func (a *App) StartWhatsapp() {
+	whatsapp.Start()
+}
+
+func (a *App) ShowWhatsapp() waLog.Logger {
+	return whatsapp.GetLogger()
 }
