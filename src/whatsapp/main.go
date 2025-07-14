@@ -21,10 +21,20 @@ import (
 	"github.com/mdp/qrterminal/v3"
 )
 
+func newLogger(name string) waLog.Logger {
+	return waLog.Stdout(name, "INFO", true)
+}
+
+var Log = newLogger("WA-Iris")
+
+func GetLogger() waLog.Logger {
+	return Log
+}
+
 func eventHandler(evt interface{}) {
 	switch v := evt.(type) {
 	case *events.Message:
-		fmt.Println("Received a message!", v.Message.GetConversation())
+		Log.Infof("Received a message! %s", v.Message.GetConversation())
 	}
 }
 
@@ -33,7 +43,7 @@ func main() {
 	ctx := context.Background()
 	db, err := dbinit.FileDB()
 	if err != nil {
-		fmt.Printf("Could not initialize the database file: %v\n", err)
+		Log.Errorf("Could not initialize the database file: %v", err)
 		return
 	}
 	container, err := sqlstore.New(ctx, "sqlite3", "file:"+db.FileDBPath()+"?_foreign_keys=on", dbLog)
@@ -61,10 +71,10 @@ func main() {
 				// Render the QR code here
 				// e.g. qrterminal.GenerateHalfBlock(evt.Code, qrterminal.L, os.Stdout)
 				// or just manually `echo 2@... | qrencode -t ansiutf8` in a terminal
-				fmt.Println("QR code:", evt.Code)
+				Log.Infof("QR code: %s", evt.Code)
 				qrterminal.GenerateHalfBlock(string(evt.Code), qrterminal.L, os.Stdout)
 			} else {
-				fmt.Println("Login event:", evt.Event)
+				Log.Infof("Login event: %s", evt.Event)
 			}
 		}
 	} else {
@@ -108,3 +118,4 @@ func main() {
 
 	client.Disconnect()
 }
+
