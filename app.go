@@ -1,6 +1,7 @@
 package main
 
 import (
+	"WA-Iris/src/dbinit"
 	"context"
 	"fmt"
 )
@@ -12,6 +13,7 @@ type App struct {
 
 // NewApp creates a new App application struct
 func NewApp() *App {
+	dbinit.Init()
 	return &App{}
 }
 
