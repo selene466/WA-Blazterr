@@ -1,6 +1,7 @@
 package main
 
 import (
+	"WA-Iris/src/dbinit"
 	"context"
 	"fmt"
 	"net/http"
@@ -28,14 +29,14 @@ func eventHandler(evt interface{}) {
 }
 
 func main() {
-	// |------------------------------------------------------------------------------------------------------|
-	// | NOTE: You must also import the appropriate DB connector, e.g. github.com/mattn/go-sqlite3 for SQLite |
-	// |------------------------------------------------------------------------------------------------------|
-	//
-
 	dbLog := waLog.Stdout("Database", "DEBUG", true)
 	ctx := context.Background()
-	container, err := sqlstore.New(ctx, "sqlite3", "file:examplestore.db?_foreign_keys=on", dbLog)
+	db, err := dbinit.FileDB()
+	if err != nil {
+		fmt.Printf("Could not initialize the database file: %v\n", err)
+		return
+	}
+	container, err := sqlstore.New(ctx, "sqlite3", "file:"+db.FileDBPath()+"?_foreign_keys=on", dbLog)
 	if err != nil {
 		panic(err)
 	}
