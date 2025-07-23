@@ -1,8 +1,8 @@
 package main
 
 import (
-	"WA-Iris/src/dbinit"
-	"WA-Iris/src/whatsapp"
+	"WA-Blazterr/src/dbinit"
+	"WA-Blazterr/src/whatsapp"
 	"context"
 	"fmt"
 

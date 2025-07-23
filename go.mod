@@ -1,4 +1,4 @@
-module WA-Iris
+module WA-Blazterr
 
 go 1.23.0
 
@@ -8,7 +8,7 @@ require (
 	github.com/adrg/xdg v0.5.3
 	github.com/mattn/go-sqlite3 v1.14.28
 	github.com/mdp/qrterminal/v3 v3.2.1
-	github.com/wailsapp/wails/v2 v2.10.1
+	github.com/wailsapp/wails/v2 v2.10.2
 	go.mau.fi/whatsmeow v0.0.0-20250709212552-0b8557ee0860
 	google.golang.org/protobuf v1.36.6
 )
@@ -19,7 +19,7 @@ require (
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/jchv/go-winloader v0.0.0-20210711035445-715c2860da7e // indirect
 	github.com/labstack/echo/v4 v4.13.3 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect

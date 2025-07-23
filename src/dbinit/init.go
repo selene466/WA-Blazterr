@@ -32,7 +32,7 @@ func Init() {
 }
 
 func FileDB() (*ConfigDB, error) {
-	configFilePath, err := xdg.ConfigFile("wa-iris/database.db")
+	configFilePath, err := xdg.ConfigFile("wa-blazterr/database.db")
 	if err != nil {
 		return nil, fmt.Errorf("COULD NOT RESOLVE PATH FOR DATABASE FILE: %w", err)
 	}

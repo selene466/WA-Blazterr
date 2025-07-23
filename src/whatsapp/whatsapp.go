@@ -1,7 +1,7 @@
 package whatsapp
 
 import (
-	"WA-Iris/src/dbinit"
+	"WA-Blazterr/src/dbinit"
 	"context"
 	"fmt"
 	"net/http"
@@ -25,7 +25,7 @@ func newLogger(name string) waLog.Logger {
 	return waLog.Stdout(name, "INFO", true)
 }
 
-var Log = newLogger("WA-Iris")
+var Log = newLogger("WA-Blazterr")
 
 func GetLogger() waLog.Logger {
 	return Log
