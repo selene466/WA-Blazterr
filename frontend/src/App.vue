@@ -1,13 +1,13 @@
 <script lang="ts" setup>
     import { Button } from "@/components/ui/button";
-    import { StartWhatsapp, ShowWhatsapp } from "../wailsjs/go/main/App";
+    import { ShowWhatsapp } from "../wailsjs/go/main/App";
 
     // var
     let data = "test";
 
     // function
     function startWhatsapp() {
-        StartWhatsapp();
+        // pass
     }
 
     async function showWhatsapp() {

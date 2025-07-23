@@ -5,5 +5,3 @@ import {waLog} from '../models';
 export function Greet(arg1:string):Promise<string>;
 
 export function ShowWhatsapp():Promise<waLog.Logger>;
-
-export function StartWhatsapp():Promise<void>;

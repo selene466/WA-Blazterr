@@ -1,7 +1,8 @@
 package whatsapp
 
 import (
-	"WA-Blazterr/src/dbinit"
+	"WA-Blazterr/src/dbsqlite"
+	dialog "WA-Blazterr/src/utils"
 	"context"
 	"fmt"
 	"net/http"
@@ -21,6 +22,11 @@ import (
 	"github.com/mdp/qrterminal/v3"
 )
 
+type Whatsapp struct {
+	ctx     context.Context
+	running bool
+}
+
 func newLogger(name string) waLog.Logger {
 	return waLog.Stdout(name, "INFO", true)
 }
@@ -38,15 +44,21 @@ func eventHandler(evt interface{}) {
 	}
 }
 
-func Start() {
+func NewWhatsapp(ctx context.Context) *Whatsapp {
+	return &Whatsapp{
+		ctx:     ctx,
+		running: false,
+	}
+}
+
+func (w *Whatsapp) Start() {
 	dbLog := waLog.Stdout("Database", "DEBUG", true)
 	ctx := context.Background()
-	db, err := dbinit.FileDB()
+	dbFilePath, err := dbsqlite.FileDB()
 	if err != nil {
-		Log.Errorf("Could not initialize the database file: %v", err)
-		return
+		dialog.ErrorDialog(w.ctx, "Error Local Database", err.Error())
 	}
-	container, err := sqlstore.New(ctx, "sqlite3", "file:"+db.FileDBPath()+"?_foreign_keys=on", dbLog)
+	container, err := sqlstore.New(ctx, "sqlite3", "file:"+dbFilePath+"?_foreign_keys=on", dbLog)
 	if err != nil {
 		panic(err)
 	}
