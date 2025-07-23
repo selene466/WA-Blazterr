@@ -1,4 +1,4 @@
-package dialog
+package utils
 
 import (
 	"context"

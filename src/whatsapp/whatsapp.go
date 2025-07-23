@@ -2,7 +2,7 @@ package whatsapp
 
 import (
 	"WA-Blazterr/src/dbsqlite"
-	dialog "WA-Blazterr/src/utils"
+	"WA-Blazterr/src/utils"
 	"context"
 	"fmt"
 	"net/http"
@@ -24,7 +24,12 @@ import (
 
 type Whatsapp struct {
 	ctx     context.Context
+	appCtx  context.Context
 	running bool
+}
+
+func (w *Whatsapp) SetAppContext(c context.Context) {
+	w.appCtx = c
 }
 
 func newLogger(name string) waLog.Logger {
@@ -56,7 +61,7 @@ func (w *Whatsapp) Start() {
 	ctx := context.Background()
 	dbFilePath, err := dbsqlite.FileDB()
 	if err != nil {
-		dialog.ErrorDialog(w.ctx, "Error Local Database", err.Error())
+		utils.ErrorDialog(w.appCtx, "Error Local Database", err.Error())
 	}
 	container, err := sqlstore.New(ctx, "sqlite3", "file:"+dbFilePath+"?_foreign_keys=on", dbLog)
 	if err != nil {
@@ -96,6 +101,9 @@ func (w *Whatsapp) Start() {
 			panic(err)
 		}
 	}
+
+	w.running = true
+	utils.WhatsappEvent(w.appCtx, "running")
 
 	// HTTP handler "/api/send"
 	http.HandleFunc("/api/send", func(w http.ResponseWriter, r *http.Request) {

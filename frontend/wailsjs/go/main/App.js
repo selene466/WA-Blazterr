@@ -9,3 +9,11 @@ export function Greet(arg1) {
 export function ShowWhatsapp() {
   return window['go']['main']['App']['ShowWhatsapp']();
 }
+
+export function StartWhatsapp() {
+  return window['go']['main']['App']['StartWhatsapp']();
+}
+
+export function WhatsappEvent(arg1) {
+  return window['go']['main']['App']['WhatsappEvent'](arg1);
+}

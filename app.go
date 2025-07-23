@@ -2,7 +2,7 @@ package main
 
 import (
 	"WA-Blazterr/src/dbsqlite"
-	dialog "WA-Blazterr/src/utils"
+	"WA-Blazterr/src/utils"
 	"WA-Blazterr/src/whatsapp"
 	"context"
 	"fmt"
@@ -23,14 +23,20 @@ func NewApp() *App {
 	}
 }
 
+func (a *App) WhatsappEvent(inp string) {
+	utils.WhatsappEvent(a.ctx, inp)
+}
+
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 
 	if err := dbsqlite.Init(); err != nil {
-		dialog.ErrorDialog(a.ctx, "Error Local Database", err.Error())
+		utils.ErrorDialog(a.ctx, "Error Local Database", err.Error())
 	}
+
+	a.whatsapp.SetAppContext(a.ctx)
 }
 
 // Greet returns a greeting for the given name
@@ -40,4 +46,8 @@ func (a *App) Greet(name string) string {
 
 func (a *App) ShowWhatsapp() waLog.Logger {
 	return whatsapp.GetLogger()
+}
+
+func (a *App) StartWhatsapp() {
+	a.whatsapp.Start()
 }
